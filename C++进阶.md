@@ -14,19 +14,57 @@
 
 
 
+```c++
+[]()mutable throw->{}
+```
 
+[]:=,&,this
 
+():parameter
 
+mutable:const
+
+throw:exception
+
+->:return type
+
+{}:function body
 
 ### 图灵停机问题
 
 *不存在这样一个程序（算法），它能够计算任何程序（算法）在给定输入上是否会结束（停机）。*
 
+这个问题有严格的数学证明，也可以由编程语言直观地进行证明。
+
 ### y组合子
 
+在lamda系统中，一切都是lamda，也就是函数。
 
+有一种函数叫高级函数，它接收一个函数，而后输出一个函数。
 
+y组合子是一个特殊的高级函数，它接收一个函数，并返回其自调用的结果，即递归。
 
+用它可以实现匿名函数的递归。在实际中应用得很少，但是在理论上很重要，证明了lamda的图灵完备性。
+
+```scheme
+lambda f. (lambda x. (f(x x)) lambda x. (f(x x)))
+```
+
+```c++
+[](f){[](x{f(x)[](x){f(x)}}}
+```
+
+```c++
+const auto& y = [](const auto& f) {
+	return [&](const auto& x) {
+		return x(x);
+	}([&](const auto& x) -> std::function<int(int)> {
+		return f([&](const int& n) {
+			return x(x)(n);
+		});
+	});
+};
+```
 
 
 
@@ -103,4 +141,24 @@ assert
 ## 类型转换
 
 **static_cast< new_type >(expression)**
+
+不能用于不相关类型转换。
+
+不会改变修饰符。
+
 **dynamic_cast< new_type >(expression)**
+
+类型安全，失败会返回NULL。
+
+一般用于子类和基类之间虚函数表的操作。
+
+**reinterpret_cast< new_type >(expression)**
+
+强制转换，非常暴力。
+
+要严格注意地址计算，因此可移植性差，可能产生随机值，最好别用。
+
+**const_cast< new_type >(expression)**
+
+解除const、volatile修饰符。
+
