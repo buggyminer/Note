@@ -102,21 +102,139 @@ __bulletin
 
 
 
+### 字符串函数
 
 
-### 内存操作函数
 
-memcpy
+### 容器操作函数
+
+别再像猴子一样叽叽喳喳乱喊乱叫.jpg
+
+#### 赋值
+
+| 函数       | 说明     |
+| ---------- | -------- |
+| fill       | 常数赋值 |
+| fill_n     | 设定长度 |
+| generate   | 函数赋值 |
+| generate_n | 设定长度 |
+
+#### 拷贝
+
+| 函数 | 说明 |
+| ---- | ---- |
+| copy |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+
+#### 排序
+
+都需要容器的随机访问支持
+
+| 函数             | 说明                          |
+| ---------------- | ----------------------------- |
+| sort             | 快排                          |
+| stable_sort      | 稳定（归并）                  |
+| partial_sort     | 堆排序 挑选出最小的若干个元素 |
+| nth_element      | 只排出第n个元素               |
+| is_sorted        | 检查是否有序                  |
+| merge            | 合并                          |
+| inplace_merge    | 就地合并                      |
+| partition        | 就地分组                      |
+| stable_partition | 稳定（就地分组）              |
+| partition_copy   | 拷贝分组                      |
+| partition_point  | 找出分组点                    |
+
+
+
+#### 查找
+
+| 函数 | 说明 |
+| ---- | ---- |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
+
+#### 移动
+
+advance
+
+prev
 
 copy
 
-new
+equal
 
-delete
+#### 组合数
 
-malloc
+| 函数 | 说明 |
+| ---- | ---- |
+|      |      |
+|      |      |
+|      |      |
+|      |      |
 
-free
+#### 堆
+
+| 函数      | 说明 |
+| --------- | ---- |
+| make_heap |      |
+| push_heap |      |
+| pop_heap  |      |
+| sort_heap |      |
+
+### 内存操作函数
+
+iota<!--名字来自APL语言，为小写希腊字母⍳，是物理上最小的字母，也指非常小的粒子或量-->
+
+#### mem<cstring>
+
+memcpy
+
+memmove<!--当两地址区间有重叠时仍能正常工作-->
+
+memset 
+
+memchr
+
+memcmp
+
+#### str<cstring>
+
+针对C风格字符串，遇到'\0'结束。
+
+除非是接驳历史代码，否则绝对不要用。
+
+strcat
+
+strcmp
+
+strcpy
+
+strlen
+
+strchr
+
+strcspn
+
+strdup
+
+strrev
+
+strstr
+
+#### 申请&释放
+
+new-delete
+
+new[]-delete[]
+
+malloc-free
 
 
 
@@ -158,7 +276,26 @@ assert
 
 要严格注意地址计算，因此可移植性差，可能产生随机值，最好别用。
 
+**bit_cast< new_type >(expression)**
+
+允许在编译阶段就确定类型。
+
+顾名思义，按照bit重新识别类型。
+
 **const_cast< new_type >(expression)**
 
 解除const、volatile修饰符。
 
+
+
+## 类型退化
+
+## range
+
+## coroutine
+
+## module
+
+## concept
+
+## 智能指针
